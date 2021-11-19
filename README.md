@@ -39,3 +39,11 @@ apk add -U curl
 curl localhost:8082
 curl localhost:8083
 ````
+
+````bash
+kubectl delete -f pods/pod.yml
+kubectl apply -f pods/labels.yml
+kubectl get pods -l app=backend
+kubectl get pods -l app=front
+kubectl get pods -l env=dev
+````
