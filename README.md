@@ -100,3 +100,17 @@ kubectl apply -f deployments/dep.yml
 kubectl get rs
 ````
 
+
+````bash
+kubectl delete -f deployments/dep.yml
+kubectl apply -f deployments/dep.yml
+kubectl get deploy
+kubectl rollout history deployment deployment-test
+kubectl apply -f deployments/dep.yml
+kubectl get pods
+kubectl rollout undo deployment deployment-test --to-revision=2
+kubectl rollout status deployment deployment-test
+````
+
+
+
