@@ -132,6 +132,15 @@ curl my-service:8080
 ip a
 ````
 
+````bash
+kubectl apply -f service/nodeport.yml
+kubectl get pods -l app=backend
+kubectl get svc -l app=backend
+
+````
+
+
+
 
 
 
