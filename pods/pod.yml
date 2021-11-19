@@ -1,8 +1,12 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: podtest3
+  name: pod4
 spec:
   containers:
-    - name: cont3
-      image: nginx
+    - name: cont4
+      image: python:3.6-alpine
+      command: ['sh', '-C', echo cont4 > index.html && python -m http.server 8082]
+    - name: cont5
+      image: python:3.6-alpine
+      command: [ 'sh', '-C', echo cont5 > index.html && python -m http.server 8083]
