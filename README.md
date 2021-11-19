@@ -77,3 +77,15 @@ kubectl apply -f replicaset/rs.yml
 kubectl get pods
 ````
 
+````bash
+kubectl delete -f replicaset/rs.yml
+kubectl apply -f deployments/dep.yml
+kubectl get deployment
+kubectl get deployment --show-labels
+kubectl rollout status deployment deployment-test
+kubectl get rs --show-labels
+kubectl get pods --show-labels
+kubectl get all
+kubectl get rs deployment-test-b7c99d94b -o yaml
+````
+
