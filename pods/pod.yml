@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: podtest3
+spec:
+  containers:
+    - name: cont3
+      image: nginx
