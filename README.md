@@ -47,3 +47,13 @@ kubectl get pods -l app=backend
 kubectl get pods -l app=front
 kubectl get pods -l env=dev
 ````
+
+````bash
+kubectl delete -f pods/labels.yml
+kubectl api-resources
+kubectl apply -f replicaset/rs.yml
+kubectl get pods -l app=pod-label
+kubectl get replicaset
+kubectl api-resources
+kubectl get rs
+````
