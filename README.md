@@ -57,3 +57,23 @@ kubectl get replicaset
 kubectl api-resources
 kubectl get rs
 ````
+
+````bash
+kubectl describe rs
+kubectl get pod 
+kubectl get pod rs-test-98vxm -o yaml
+kubectl get rs rs-test -o yaml
+````
+
+````bash
+kubectl delete -f replicaset/rs.yml
+kubectl run --generator=run-pod/v1 podtest1 --image=nginx:alpine
+kubectl run --generator=run-pod/v1 podtest2 --image=nginx:alpine
+kubectl label pods podtest1 app=pod-label
+kubectl label pods podtest2 app=pod-label
+kubectl describe pod podtest1
+kubectl get pods -l app=pod-label
+kubectl apply -f replicaset/rs.yml
+kubectl get pods
+````
+
