@@ -95,5 +95,8 @@ kubectl apply -f deployments/dep.yml
 kubectl rollout status deployment deployment-test
 kubectl describe deployment deployment-test
 kubectl get pods
+kubectl rollout history deployment deployment-test
+kubectl apply -f deployments/dep.yml
+kubectl get rs
 ````
 
