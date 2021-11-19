@@ -89,3 +89,11 @@ kubectl get all
 kubectl get rs deployment-test-b7c99d94b -o yaml
 ````
 
+
+````bash
+kubectl apply -f deployments/dep.yml
+kubectl rollout status deployment deployment-test
+kubectl describe deployment deployment-test
+kubectl get pods
+````
+
