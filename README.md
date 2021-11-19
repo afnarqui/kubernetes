@@ -112,5 +112,26 @@ kubectl rollout undo deployment deployment-test --to-revision=2
 kubectl rollout status deployment deployment-test
 ````
 
+````bash
+kubectl api-resources
+kubectl delete -f deployments/dep.yml
+kubectl get pods
+kubectl apply -f service/svc.yml
+kubectl get svc
+kubectl get svc -l app=front
+kubectl describe svc my-service
+kubectl get endpoints
+kubectl get pods -l app=front -o wide
+kubectl run --generator=run-pod/v1 podtest2 --image=nginx:alpine
+kubectl label pods podtest2 app=pod-label
+kubectl get svc -l app=front
+kubectl run --rm -ti --generator=run-pod/v1 podtest4 --image=nginx:alpine -- sh
+apk add -U curl
+curl 10.108.25.152:8080
+curl my-service:8080
+ip a
+````
+
+
 
 
