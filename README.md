@@ -283,6 +283,17 @@ https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.ht
 curl -Lo v2_3_0_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.3.0/v2_3_0_full.yaml
 ````
 
+````bash
+kubectl get -n kube-system pods
+kubectl logs -f -n kube-system aws-load-balancer-controller-777c5bc6b5-fgdbc
+nslookup k8s-default-simplein-c51b4c8137-176125708.us-east-1.elb.amazonaws.com
+sudo vim etc/host
+18.211.1.204 react.afnarqui.com
+kubectl delete ingress.yml
+kubectl delete service.yml
+kubectl delete deployment.yml
+kubectl delete namespace.yml
+````
 
 
 
