@@ -196,7 +196,42 @@ eksctl create nodegroup \
 
 ````
 
+## Ingress controller
 
+````bash
+https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html
+eksctl utils associate-iam-oidc-provider \
+    --region us-east-1 \
+    --cluster ikatech-cluster \
+    --approve
+
+aws iam create-policy \
+--policy-name ALBIngressControllerIAMPolicy \
+--policy-document https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json
+
+curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/rbac-role.yaml
+
+eksctl create iamserviceaccount \
+  --region us-east-1 \
+  --name alb-ingress-controller \
+  --namespace=kube-system \
+  --cluster=ikatech-cluster \
+  --attach-policy-arn=arn:aws:iam::975812830743:policy/ALBIngressControllerIAMPolicy \
+  --override-existing-serviceaccounts \
+  --approve
+
+  kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/alb-ingress-controller.yaml
+
+  kubectl edit deployment.apps/alb-ingress-controller -n kube-system
+  spec:
+    containers:
+    - args:
+     - --cluster-name=name-cluster
+
+    kubectl get pods -n kube-system     
+````
 
 
 
