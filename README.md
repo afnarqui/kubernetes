@@ -205,11 +205,12 @@ eksctl utils associate-iam-oidc-provider \
     --cluster ikatech-cluster \
     --approve
 
+curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json
+
 aws iam create-policy \
 --policy-name ALBIngressControllerIAMPolicy \
---policy-document https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json
+--policy-document "https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json"
 
-curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/iam-policy.json
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/rbac-role.yaml
 
@@ -228,9 +229,23 @@ eksctl create iamserviceaccount \
   spec:
     containers:
     - args:
-     - --cluster-name=name-cluster
+     - --cluster-name=ikatech-cluster
 
     kubectl get pods -n kube-system     
+````
+
+````bash
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.3.0/docs/examples/2048/2048_full.yaml
+kubectl apply -f ingress/ing.yml
+kubectl get all -n game-2048
+kubectl port-forward pod/deployment-2048-79785cfdff-746bw 7000:80 -n game-2048
+kubectl apply -f ingress/ingress.yml
+kubectl get ingress -n game-2048
+kubectl get -n kube-system pods
+kubectl logs -f -n kube-system alb-ingress-controller-5d4f7dc9dd-lbx4b
+kubectl get svc --all-namespaces
+kubectl delete svc service-2048 -n game-2048
+eksctl delete cluster ikatech-cluster
 ````
 
 
