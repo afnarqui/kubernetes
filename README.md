@@ -316,5 +316,35 @@ kubectl run --generator=run-pod/v1 apache-bench -i --tty --rm --image=httpd -- b
 ab -n 500000 -c 1000 http://back.afnarqui.com/
 ````
 
+````bash
+https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html
+curl -o cluster-autoscaler-autodiscover.yaml https://raw.githubusercontent.com/kubernetes/autoscaler/master/cluster-autoscaler/cloudprovider/aws/examples/cluster-autoscaler-autodiscover.yaml
+kubectl apply -f cluster-autoscaler-autodiscover.yaml
+kubectl get deploy -n kube-system
+kubectl -n kube-system edit deployment.apps/cluster-autoscaler
+      containers:
+      - command:
+        - ./cluster-autoscaler
+        - --v=4
+        - --stderrthreshold=info
+        - --cloud-provider=aws
+        - --skip-nodes-with-local-storage=false
+        - --expander=least-waste
+        - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/afn-cluster
+        - --balance-similar-node-groups
+        - --skip-nodes-with-system-pods-false
+        - --scale-down-unneeded-time=5m
+
+
+kubectl get hpa 
+kubectl delete hpa node-back-deployment        
+kubectl get deploy
+kubectl edit deploy node-back-deployment        
+kubectl get pods -A
+kubectl logs -f cluster-autoscaler-59bb754558-78f2l -n kube-system
+kubectl get nodes
+kubectl get pods
+
+````
 
 
