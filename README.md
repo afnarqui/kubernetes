@@ -248,6 +248,41 @@ kubectl delete svc service-2048 -n game-2048
 eksctl delete cluster ikatech-cluster
 ````
 
+## cluster eks
+
+````bash
+eksctl create cluster --name afn-cluster
+
+eksctl utils associate-iam-oidc-provider --cluster=afn-cluster --approve
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.4/docs/examples/rbac-role.yaml
+
+curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.2.0/docs/install/iam_policy.json
+	aws iam create-policy \
+		--policy-name AWSLoadBalancerControllerIAMPolicy \
+		--policy-document file://iam_policy.json
+
+	eksctl create iamserviceaccount \
+      --cluster=afn-cluster \
+      --namespace=kube-system \
+      --name=aws-load-balancer-controller \
+      --attach-policy-arn=arn:aws:iam::975812830743:policy/AWSLoadBalancerControllerIAMPolicy \
+      --override-existing-serviceaccounts \
+      --approve
+
+
+kubectl apply \
+		--validate=false \
+		-f https://github.com/jetstack/cert-manager/releases/download/v1.1.1/cert-manager.yaml
+
+
+
+https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
+
+
+curl -Lo v2_3_0_full.yaml https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.3.0/v2_3_0_full.yaml
+````
+
 
 
 
