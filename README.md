@@ -295,5 +295,26 @@ kubectl delete deployment.yml
 kubectl delete namespace.yml
 ````
 
+````bash
+https://docs.aws.amazon.com/eks/latest/userguide/horizontal-pod-autoscaler.html
+https://docs.aws.amazon.com/eks/latest/userguide/metrics-server.html
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+kubectl get deployment metrics-server -n kube-system
+kubectl get deployment
+kubectl autoscale deployment node-back-deployment --cpu-percent=50 --min=2 --max=10
+kubectl autoscale deployment react-front-deployment --cpu-percent=50 --min=2 --max=10
+kubectl get hpa
+kubectl get -o yaml hpa node-back-deployment
+kubectl describe hpa node-back-deployment
+kubectl edit hpa node-back-deployment
+kubectl get deploy -o yaml node-deployment
+https://aws.amazon.com/es/ec2/instance-types/t3/
+kubectl get pods
+watch kubectl get pods
+watch kubectl get hpa
+kubectl run --generator=run-pod/v1 apache-bench -i --tty --rm --image=httpd -- bash
+ab -n 500000 -c 1000 http://back.afnarqui.com/
+````
+
 
 
