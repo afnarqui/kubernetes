@@ -168,6 +168,35 @@ eksctl create cluster --name ikatech-cluster --without-nodegroup --region us-eas
 cat .aws/credentials
 ````
 
+````bash
+CloudFormation
+eks > clusters
+/home/afnarqui/.kube/config
+rm -fr /home/afnarqui/.kube/config > no eliminar si quieren conectarse con eksctl
+aws eks --region us-east-1 update-kubeconfig --name ikatech-cluster
+kubectl get svc
+kubectl cluster-info
+kubectl run --generator=run-pod/v1 pod1 --image=nginx:alpine
+kubectl get pods
+kubectl describe pod id
+https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html
+https://aws.amazon.com/es/ec2/instance-types/t3/
+eksctl create nodegroup -h
+eksctl create nodegroup \
+  --cluster ikatech-cluster \
+  --region us-east-1  \
+  --name ikatech-workers \
+  --node-type t2.medium \
+  --nodes 1 \
+  --nodes-min 1 \
+  --nodes-max 1 \
+  --asg-access
+
+  kubectl get pods
+
+````
+
+
 
 
 
