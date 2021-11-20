@@ -156,6 +156,18 @@ pip3 install -U awscli
 aws configure 
 ````
 
+````bash
+aws eks help
+https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+sudo chmod +x /usr/local/bin/eksctl
+eksctl version
+
+eksctl create cluster --name ikatech-cluster --without-nodegroup --region us-east-1 --zones us-east-1b,us-east-1a
+cat .aws/credentials
+````
+
 
 
 
