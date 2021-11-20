@@ -347,4 +347,12 @@ kubectl get pods
 
 ````
 
+````bash
+docker pull golang
+docker run --rm -dti -v $PWD/:/go --net host --name golang golang bash
+docker exec -it golang bash
+go run main.go
+http://localhost:9090/
+````
+
 
