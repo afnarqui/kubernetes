@@ -145,6 +145,17 @@ kubectl delete -f deployments/dep.yml
 
 ````
 
+### aws eks
+
+````bash
+docker run --rm -ti ubuntu
+apt-get update
+apt-get install python3-pip
+pip3
+pip3 install -U awscli
+aws configure 
+````
+
 
 
 
