@@ -140,6 +140,11 @@ kubectl get svc -l app=backend
 ````
 
 
+````bash
+kubectl delete -f deployments/dep.yml
+
+````
+
 
 
 
